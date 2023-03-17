@@ -25,7 +25,7 @@ class TennisGame1:
 
     def score(self):
         result = ""
-        if self.p1_points == self.p2_points:
+        if self.is_duce():
             result = self.deuce_cases()
         elif self.p1_points >= 4 or self.p2_points >= 4:
             result = self.break_point()
@@ -53,6 +53,9 @@ class TennisGame1:
             1: "Fifteen-All",
             2: "Thirty-All",
         }.get(self.p1_points, "Deuce")
+
+    def is_duce(self):
+        return self.p1_points == self.p2_points
 
 
 class TennisGame2:
