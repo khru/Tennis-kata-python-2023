@@ -20,7 +20,7 @@ class TennisGame1:
     def score(self):
         result = ""
         if self.p1points == self.p2points:
-            result = self.deuce_cases(result)
+            result = self.deuce_cases()
         elif self.p1points >= 4 or self.p2points >= 4:
             minus_result = self.p1points - self.p2points
             if minus_result == 1:
@@ -46,13 +46,12 @@ class TennisGame1:
                 }[temp_score]
         return result
 
-    def deuce_cases(self, result):
-        result = {
+    def deuce_cases(self):
+        return {
             0: "Love-All",
             1: "Fifteen-All",
             2: "Thirty-All",
         }.get(self.p1points, "Deuce")
-        return result
 
 
 class TennisGame2:
