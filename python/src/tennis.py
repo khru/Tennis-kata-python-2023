@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
+
+
 class TennisGame1:
 
     INITIAL_POINTS = 0
     POINT = 1
+    MINIMUM_BREAK_POINT_LIMIT = 4
     game_score = {
         0: "Love",
         1: "Fifteen",
@@ -25,15 +28,16 @@ class TennisGame1:
 
     def score(self):
         result = ""
-        if self.is_duce():
+        if self.is_deuce():
             result = self.deuce_cases()
-        elif self.p1_points >= 4 or self.p2_points >= 4:
+        elif self.is_break_point():
             result = self.break_point()
         else:
-            result += self.game_score[self.p1_points]
-            result += "-"
-            result += self.game_score[self.p2_points]
+            result = self.add_score()
         return result
+
+    def add_score(self):
+        return f"{self.game_score[self.p1_points]}-{self.game_score[self.p2_points]}"
 
     def break_point(self):
         minus_result = self.p1_points - self.p2_points
@@ -54,8 +58,11 @@ class TennisGame1:
             2: "Thirty-All",
         }.get(self.p1_points, "Deuce")
 
-    def is_duce(self):
+    def is_deuce(self):
         return self.p1_points == self.p2_points
+
+    def is_break_point(self):
+        return self.p1_points >= self.MINIMUM_BREAK_POINT_LIMIT or self.p2_points >= self.MINIMUM_BREAK_POINT_LIMIT
 
 
 class TennisGame2:
