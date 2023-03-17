@@ -28,19 +28,23 @@ class TennisGame1:
         if self.p1points == self.p2points:
             result = self.deuce_cases()
         elif self.p1points >= 4 or self.p2points >= 4:
-            minus_result = self.p1points - self.p2points
-            if minus_result == 1:
-                result = "Advantage " + self.player1Name
-            elif minus_result == -1:
-                result = "Advantage " + self.player2Name
-            elif minus_result >= 2:
-                result = "Win for " + self.player1Name
-            else:
-                result = "Win for " + self.player2Name
+            result = self.break_point()
         else:
             result += self.game_score[self.p1points]
             result += "-"
             result += self.game_score[self.p2points]
+        return result
+
+    def break_point(self):
+        minus_result = self.p1points - self.p2points
+        if minus_result == 1:
+            result = "Advantage " + self.player1Name
+        elif minus_result == -1:
+            result = "Advantage " + self.player2Name
+        elif minus_result >= 2:
+            result = "Win for " + self.player1Name
+        else:
+            result = "Win for " + self.player2Name
         return result
 
     def deuce_cases(self):
