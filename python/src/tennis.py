@@ -14,29 +14,29 @@ class TennisGame1:
     def __init__(self, player_1_name, player_2_name):
         self.player1Name = player_1_name
         self.player2Name = player_2_name
-        self.p1points = self.INITIAL_POINTS
-        self.p2points = self.INITIAL_POINTS
+        self.p1_points = self.INITIAL_POINTS
+        self.p2_points = self.INITIAL_POINTS
 
     def won_point(self, player_name):
         if player_name == self.player1Name:
-            self.p1points += self.POINT
+            self.p1_points += self.POINT
         else:
-            self.p2points += self.POINT
+            self.p2_points += self.POINT
 
     def score(self):
         result = ""
-        if self.p1points == self.p2points:
+        if self.p1_points == self.p2_points:
             result = self.deuce_cases()
-        elif self.p1points >= 4 or self.p2points >= 4:
+        elif self.p1_points >= 4 or self.p2_points >= 4:
             result = self.break_point()
         else:
-            result += self.game_score[self.p1points]
+            result += self.game_score[self.p1_points]
             result += "-"
-            result += self.game_score[self.p2points]
+            result += self.game_score[self.p2_points]
         return result
 
     def break_point(self):
-        minus_result = self.p1points - self.p2points
+        minus_result = self.p1_points - self.p2_points
         if minus_result == 1:
             result = "Advantage " + self.player1Name
         elif minus_result == -1:
@@ -52,7 +52,7 @@ class TennisGame1:
             0: "Love-All",
             1: "Fifteen-All",
             2: "Thirty-All",
-        }.get(self.p1points, "Deuce")
+        }.get(self.p1_points, "Deuce")
 
 
 class TennisGame2:
