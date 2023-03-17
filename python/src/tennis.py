@@ -4,6 +4,12 @@ class TennisGame1:
 
     INITIAL_POINTS = 0
     POINT = 1
+    game_score = {
+        0: "Love",
+        1: "Fifteen",
+        2: "Thirty",
+        3: "Forty",
+    }
 
     def __init__(self, player_1_name, player_2_name):
         self.player1Name = player_1_name
@@ -32,18 +38,9 @@ class TennisGame1:
             else:
                 result = "Win for " + self.player2Name
         else:
-            for i in range(1, 3):
-                if i == 1:
-                    temp_score = self.p1points
-                else:
-                    result += "-"
-                    temp_score = self.p2points
-                result += {
-                    0: "Love",
-                    1: "Fifteen",
-                    2: "Thirty",
-                    3: "Forty",
-                }[temp_score]
+            result += self.game_score[self.p1points]
+            result += "-"
+            result += self.game_score[self.p2points]
         return result
 
     def deuce_cases(self):
