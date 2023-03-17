@@ -11,15 +11,21 @@ class TennisGame1:
         2: "Thirty",
         3: "Forty",
     }
+    
+    DUCE_SCORE = {
+        0: "Love-All",
+        1: "Fifteen-All",
+        2: "Thirty-All",
+    }
 
     def __init__(self, player_1_name, player_2_name):
-        self.player1Name = player_1_name
-        self.player2Name = player_2_name
+        self.player1_name = player_1_name
+        self.player2_name = player_2_name
         self.p1_points = self.INITIAL_POINTS
         self.p2_points = self.INITIAL_POINTS
 
     def won_point(self, player_name):
-        if player_name == self.player1Name:
+        if player_name == self.player1_name:
             self.p1_points += self.POINT
         else:
             self.p2_points += self.POINT
@@ -38,21 +44,15 @@ class TennisGame1:
     def break_point(self):
         minus_result = self.p1_points - self.p2_points
         if minus_result == 1:
-            result = "Advantage " + self.player1Name
+            return "Advantage " + self.player1_name
         elif minus_result == -1:
-            result = "Advantage " + self.player2Name
+            return "Advantage " + self.player2_name
         elif minus_result >= 2:
-            result = "Win for " + self.player1Name
-        else:
-            result = "Win for " + self.player2Name
-        return result
+            return "Win for " + self.player1_name
+        return "Win for " + self.player2_name
 
     def deuce_cases(self):
-        return {
-            0: "Love-All",
-            1: "Fifteen-All",
-            2: "Thirty-All",
-        }.get(self.p1_points, "Deuce")
+        return self.DUCE_SCORE.get(self.p1_points, "Deuce")
 
     def is_deuce(self):
         return self.p1_points == self.p2_points
