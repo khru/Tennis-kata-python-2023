@@ -2,26 +2,25 @@
 
 class TennisGame1:
 
+    INITIAL_POINTS = 0
+    POINT = 1
+
     def __init__(self, player_1_name, player_2_name):
         self.player1Name = player_1_name
         self.player2Name = player_2_name
-        self.p1points = 0
-        self.p2points = 0
+        self.p1points = self.INITIAL_POINTS
+        self.p2points = self.INITIAL_POINTS
 
     def won_point(self, player_name):
         if player_name == self.player1Name:
-            self.p1points += 1
+            self.p1points += self.POINT
         else:
-            self.p2points += 1
+            self.p2points += self.POINT
 
     def score(self):
         result = ""
         if self.p1points == self.p2points:
-            result = {
-                0: "Love-All",
-                1: "Fifteen-All",
-                2: "Thirty-All",
-            }.get(self.p1points, "Deuce")
+            result = self.deuce_cases(result)
         elif self.p1points >= 4 or self.p2points >= 4:
             minus_result = self.p1points - self.p2points
             if minus_result == 1:
@@ -45,6 +44,14 @@ class TennisGame1:
                     2: "Thirty",
                     3: "Forty",
                 }[temp_score]
+        return result
+
+    def deuce_cases(self, result):
+        result = {
+            0: "Love-All",
+            1: "Fifteen-All",
+            2: "Thirty-All",
+        }.get(self.p1points, "Deuce")
         return result
 
 
